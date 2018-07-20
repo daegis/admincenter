@@ -24,11 +24,11 @@ public class WalletErrorController implements ErrorController {
         int status = response.getStatus();
         switch (status) {
             case 403:
-                return "403";
+                return "error/403";
             case 404:
                 return "error/404";
             case 500:
-                return "500";
+                return "error/500";
         }
 
         return "index";
