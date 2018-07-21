@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="MerchantMapper">
+    <resultMap id="BaseResultMap" type="com.hnair.wallet.admincenter.model.Merchant">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="merchant_id" property="merchantId" jdbcType="VARCHAR"/>
+        <result column="merchant_name" property="merchantName" jdbcType="VARCHAR"/>
+        <result column="ip_white_list" property="ipWhiteList" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Where">
+        <if test="id != null">and id= #{id}</if>
+        <if test="merchantId != null and merchantId !=''">and merchant_id= #{merchantId}</if>
+        <if test="merchantName != null and merchantName !=''">and merchant_name= #{merchantName}</if>
+        <if test="ipWhiteList != null and ipWhiteList !=''">and ip_white_list= #{ipWhiteList}</if>
+    </sql>
+    <sql id="Base_Column_List">
+		id ,
+		merchant_id ,
+		merchant_name ,
+		ip_white_list 
+	</sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from merchant
+        where
+        id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from merchant
+		where
+		id = #{id,jdbcType=INTEGER}
+	</delete>
+
+    <insert id="insertSelective" parameterType="com.hnair.wallet.admincenter.model.Merchant">
+        insert into merchant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="merchantId != null and merchantId !=''">merchant_id,</if>
+            <if test="merchantName != null and merchantName !=''">merchant_name,</if>
+            <if test="ipWhiteList != null and ipWhiteList !=''">ip_white_list,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="merchantId != null and merchantId !=''">
+                #{merchantId,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantName != null and merchantName !=''">
+                #{merchantName,jdbcType=VARCHAR},
+            </if>
+            <if test="ipWhiteList != null and ipWhiteList !=''">
+                #{ipWhiteList,jdbcType=VARCHAR},
+            </if>
+
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hnair.wallet.admincenter.model.Merchant">
+        update merchant
+        <set>
+            <if test="merchantId != null and merchantId !=''">
+                merchant_id= #{merchantId,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantName != null and merchantName !=''">
+                merchant_name= #{merchantName,jdbcType=VARCHAR},
+            </if>
+            <if test="ipWhiteList != null and ipWhiteList !=''">
+                ip_white_list= #{ipWhiteList,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where
+        id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getAll" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from merchant where 1=1
+        <include refid="Base_Where"/>
+    </select>
+    <select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+        select count(1) from merchant where 1=1
+        <include refid="Base_Where"/>
+    </select>
+    <select id="pageData" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from merchant where 1=1
+        <include refid="Base_Where"/>
+    </select>
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from merchant where id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="OrderRefundInfoMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.wallet.admincenter.model.OrderRefundInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
+		<result column="merchant_id" property="merchantId" jdbcType="VARCHAR" />
+		<result column="channel_order_no" property="channelOrderNo" jdbcType="VARCHAR" />
+		<result column="channel_refund_no" property="channelRefundNo" jdbcType="VARCHAR" />
+		<result column="account_type" property="accountType" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="refund_time" property="refundTime" jdbcType="TIMESTAMP" />
+		<result column="refund_status" property="refundStatus" jdbcType="INTEGER" />
+		<result column="refund_balance" property="refundBalance" jdbcType="DECIMAL" />
+		<result column="refund_reason" property="refundReason" jdbcType="VARCHAR" />
+		<result column="last_modified_time" property="lastModifiedTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="tradeNo != null and tradeNo !=''"> and trade_no= #{tradeNo}</if>
+		<if test="merchantId != null and merchantId !=''"> and merchant_id= #{merchantId}</if>
+		<if test="channelOrderNo != null and channelOrderNo !=''"> and channel_order_no= #{channelOrderNo}</if>
+		<if test="channelRefundNo != null and channelRefundNo !=''"> and channel_refund_no= #{channelRefundNo}</if>
+		<if test="accountType != null"> and account_type= #{accountType}</if>	
+		<if test="userId != null"> and user_id= #{userId}</if>	
+		<if test="refundTime != null"> and refund_time= #{refundTime}</if>	
+		<if test="refundStatus != null"> and refund_status= #{refundStatus}</if>	
+		<if test="refundBalance != null"> and refund_balance= #{refundBalance}</if>	
+		<if test="refundReason != null and refundReason !=''"> and refund_reason= #{refundReason}</if>
+		<if test="lastModifiedTime != null"> and last_modified_time= #{lastModifiedTime}</if>	
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		trade_no ,
+		merchant_id ,
+		channel_order_no ,
+		channel_refund_no ,
+		account_type ,
+		user_id ,
+		refund_time ,
+		refund_status ,
+		refund_balance ,
+		refund_reason ,
+		last_modified_time 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from order_refund_info
+		where
+		id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from order_refund_info
+		where
+		id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.wallet.admincenter.model.OrderRefundInfo">
+		insert into order_refund_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="tradeNo != null and tradeNo !=''">trade_no,</if>
+			<if test="merchantId != null and merchantId !=''">merchant_id,</if>
+			<if test="channelOrderNo != null and channelOrderNo !=''">channel_order_no,</if>
+			<if test="channelRefundNo != null and channelRefundNo !=''">channel_refund_no,</if>
+			<if test="accountType != null">account_type,</if>	
+			<if test="userId != null">user_id,</if>	
+			<if test="refundTime != null">refund_time,</if>	
+			<if test="refundStatus != null">refund_status,</if>	
+			<if test="refundBalance != null">refund_balance,</if>	
+			<if test="refundReason != null and refundReason !=''">refund_reason,</if>
+			<if test="lastModifiedTime != null">last_modified_time,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="tradeNo != null and tradeNo !=''">
+				#{tradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantId != null and merchantId !=''">
+				#{merchantId,jdbcType=VARCHAR},
+			</if>
+			<if test="channelOrderNo != null and channelOrderNo !=''">
+				#{channelOrderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="channelRefundNo != null and channelRefundNo !=''">
+				#{channelRefundNo,jdbcType=VARCHAR},
+			</if>
+			<if test="accountType != null">
+				#{accountType,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="refundTime != null">
+				#{refundTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="refundStatus != null">
+				#{refundStatus,jdbcType=INTEGER},
+			</if>
+			<if test="refundBalance != null">
+				#{refundBalance,jdbcType=DECIMAL},
+			</if>
+			<if test="refundReason != null and refundReason !=''">
+				#{refundReason,jdbcType=VARCHAR},
+			</if>
+			<if test="lastModifiedTime != null">
+				#{lastModifiedTime,jdbcType=TIMESTAMP},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.wallet.admincenter.model.OrderRefundInfo">
+		update order_refund_info
+		<set>
+			<if test="tradeNo != null and tradeNo !=''">
+				trade_no= #{tradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantId != null and merchantId !=''">
+				merchant_id= #{merchantId,jdbcType=VARCHAR},
+			</if>
+			<if test="channelOrderNo != null and channelOrderNo !=''">
+				channel_order_no= #{channelOrderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="channelRefundNo != null and channelRefundNo !=''">
+				channel_refund_no= #{channelRefundNo,jdbcType=VARCHAR},
+			</if>
+			<if test="accountType != null">
+				account_type= #{accountType,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				user_id= #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="refundTime != null">
+				refund_time= #{refundTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="refundStatus != null">
+				refund_status= #{refundStatus,jdbcType=INTEGER},
+			</if>
+			<if test="refundBalance != null">
+				refund_balance= #{refundBalance,jdbcType=DECIMAL},
+			</if>
+			<if test="refundReason != null and refundReason !=''">
+				refund_reason= #{refundReason,jdbcType=VARCHAR},
+			</if>
+			<if test="lastModifiedTime != null">
+				last_modified_time= #{lastModifiedTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from order_refund_info where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from order_refund_info where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from order_refund_info where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from order_refund_info where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>
