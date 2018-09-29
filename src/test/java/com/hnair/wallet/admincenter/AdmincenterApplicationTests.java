@@ -1,16 +1,16 @@
 package com.hnair.wallet.admincenter;
 
 import com.alibaba.fastjson.JSON;
-import com.hnair.wallet.admincenter.dao.service.ICommonService;
-import com.hnair.wallet.admincenter.model.Merchant;
-import com.hnair.wallet.admincenter.model.OrderConsumeInfo;
-import com.hnair.wallet.admincenter.service.TestTransaction;
+import com.hnair.consumer.hipay.model.Merchant;
+import com.hnair.consumer.hipay.model.OrderConsumeInfo;
+import com.hnair.spring.boot.mybatis.component.service.ICommonService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.transaction.TestTransaction;
 
 import java.util.List;
 
@@ -27,7 +27,6 @@ public class AdmincenterApplicationTests {
 
     @Test
     public void testTransactional() throws Exception {
-        testTransaction.testInsert("ddd");
     }
 
     @Test

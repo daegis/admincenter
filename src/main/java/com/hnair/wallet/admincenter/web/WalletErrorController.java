@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Using IntelliJ IDEA.
+ * 错误页面统一跳转controller 不要修改！
  *
  * @author XIANYINGDA at 7/20/2018 10:37 PM
  */
@@ -30,7 +31,6 @@ public class WalletErrorController implements ErrorController {
             case 500:
                 return "error/500";
         }
-
         return "index";
     }
 }
